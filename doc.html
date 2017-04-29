@@ -1,0 +1,2474 @@
+<!DOCTYPE HTML>
+<html>
+<head><title> API documentation</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="generator" content="https://github.com/kevinrenskers/raml2html 2.0.1">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.page-header pre code, .top-resource-description pre code').each(function (i, block) {
+                hljs.highlightBlock(block);
+            });
+
+            $('[data-toggl]').click(function () {
+                var selector = $(this).data('target') + ' pre code';
+                $(selector).each(function (i, block) {
+                    hljs.highlightBlock(block);
+                });
+            });
+
+            // open modal on hashes like #_action_get
+            $(window).bind('hashchange', function (e) {
+                var anchor_id = document.location.hash.substr(1); //strip #
+                var element = $('#' + anchor_id);
+
+                // do we have such element + is it a modal?  --> show it
+                if (element.length && element.hasClass('modal')) {
+                    element.modal('show');
+                }
+            });
+
+            // execute hashchange on first page load
+            $(window).trigger('hashchange');
+
+            // remove url fragment on modal hide
+            $('.modal').on('hidden.bs.modal', function () {
+                if (history && history.replaceState) {
+                    history.replaceState({}, '', '#');
+                }
+            });
+        });
+    </script>
+    <style>
+        .hljs {
+            background: transparent;
+        }
+
+        .parent {
+            color: #999;
+        }
+
+        .list-group-item > .badge {
+            float: none;
+            margin-right: 6px;
+        }
+
+        .panel-title > .methods {
+            float: right;
+        }
+
+        .badge {
+            border-radius: 0;
+            text-transform: uppercase;
+            font-weight: normal;
+            color: #f3f3f6;
+            line-height: normal;
+        }
+
+        .badge_get {
+            background-color: #63a8e2;
+        }
+
+        .badge_post {
+            background-color: #6cbd7d;
+        }
+
+        .badge_put {
+            background-color: #22bac4;
+        }
+
+        .badge_delete {
+            background-color: #d26460;
+        }
+
+        .badge_patch {
+            background-color: #ccc444;
+        }
+
+        .list-group, .panel-group {
+            margin-bottom: 0;
+        }
+
+        .panel-group .panel + .panel-white {
+            margin-top: 0;
+        }
+
+        .panel-group .panel-white {
+            border-bottom: 1px solid #F5F5F5;
+            border-radius: 0;
+        }
+
+        .panel-white:last-child {
+            border-bottom-color: white;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .panel-white .panel-heading {
+            background: white;
+        }
+
+        .tab-pane ul {
+            padding-left: 2em;
+        }
+
+        .tab-pane h2 {
+            font-size: 1.2em;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-pane h3 {
+            font-size: 1.1em;
+        }
+
+        .tab-content {
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        #sidebar {
+            margin-top: 30px;
+            padding-right: 5px;
+            overflow: auto;
+            height: 90%;
+        }
+
+        .top-resource-description {
+            border-bottom: 1px solid #ddd;
+            background: #fcfcfc;
+            padding: 15px 15px 0 15px;
+            margin: -15px -15px 10px -15px;
+        }
+
+        .resource-description {
+            border-bottom: 1px solid #fcfcfc;
+            background: #fcfcfc;
+            padding: 15px 15px 0 15px;
+            margin: -15px -15px 10px -15px;
+        }
+
+        .resource-description p:last-child {
+            margin: 0;
+        }
+
+        .list-group .badge {
+            float: left;
+        }
+
+        .method_description {
+            margin-left: 85px;
+        }
+
+        .method_description p:last-child {
+            margin: 0;
+        }
+
+        .list-group-item {
+            cursor: pointer;
+        }
+
+        .list-group-item:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target="#sidebar">
+<div class="container">
+    <div class="row">
+        <div class="col-md-9" role="main">
+            <div class="page-header">
+                <p>http://115.159.56.177:3000</p></div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 id="token" class="panel-title">/address</h3></div>
+                <div class="panel-body">
+                    <div class="panel-group">
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_token"><span
+                                    class="parent"></span>/address</a> <span class="methods"> <a href="#token_delete"><span
+                                    class="badge badge_get">get所有address</span></a></span></h4></div>
+                            <div class="modal fade" tabindex="0" id="token_post">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span>
+                                                <span class="parent"></span>/address</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>用户登录获取token，通过headers返回</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#token_post_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#token_post_response" data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="token_post_request"><h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Username</strong>: <em>required (string)</em>
+                                                            <p>用户名</p></li>
+                                                        <li><strong>X-Password</strong>: <em>required (string)</em>
+                                                            <p>密码</p></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="token_post_response"><h2>HTTP status code <a
+                                                        href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>IOC551fea47e4b02dd0ab568b85</pre>
+                                                        </li>
+                                                    </ul>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": {
+    "@id": "1",
+    "id": 26,
+    "create_time": "2015-05-14 19:51:15",
+    "modify_time": "2015-05-23 12:40:40",
+    "account": "system",
+    "password": null,
+    "title": "管理员",
+    "name": "管理员",
+    "systemName": null,
+    "mobilePhone": null,
+    "workPhone": null,
+    "role": "ADMINISTRATOR",
+    "departments": [
+      {
+        "@id": "2",
+        "id": 11,
+        "create_time": "2014-12-29 12:37:39",
+        "modify_time": "2014-12-29 12:37:39",
+        "name": "计生委",
+        "description": "JSW_计生委"
+      },
+      {
+        "@id": "3",
+        "id": 5,
+        "create_time": "2015-01-03 22:33:35",
+        "modify_time": "2015-01-03 22:33:35",
+        "name": "消防局",
+        "description": "XFJ_消防局"
+      },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … },
+      { … }
+    ]
+  },
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="token_delete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span>
+                                                <span class="parent"></span>/address</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>登出用户</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#token_delete_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#token_delete_response" data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="token_delete_request"><h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="token_delete_response"><h2>HTTP status code <a
+                                                        href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": "Logout.",
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_token_isLogin"><span
+                                    class="parent">/address</span>/add</a> <span class="methods"><a
+                                    href="#token_isLogin_get"><span class="badge badge_post">post添加地址</span></a></span></h4>
+                            </div>
+                            <div id="panel_token_isLogin" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#token_isLogin_get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"><p>查询用户是否登录</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="token_isLogin_get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_get">get</span> <span
+                                                    class="parent">/address</span>/isLogin</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>查询用户是否登录</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#token_isLogin_get_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#token_isLogin_get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="token_isLogin_get_request"><h3>
+                                                    Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="token_isLogin_get_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": true,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+  }
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/210"
+                                                                            target="_blank">210</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 210,
+  "message": "用户session已结束"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_token_isLogin"><span
+                                    class="parent">/update</span>/{id}</a> <span class="methods"><a
+                                    href="#token_isLogin_get"><span class="badge badge_post">post更新地址</span></a></span></h4>
+                            </div>
+                            <div id="panel_token_isLogin" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#token_isLogin_get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"><p>查询用户是否登录</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="token_isLogin_get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_get">get</span> <span
+                                                    class="parent">/address</span>/isLogin</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>查询用户是否登录</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#token_isLogin_get_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#token_isLogin_get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="token_isLogin_get_request"><h3>
+                                                    Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="token_isLogin_get_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": true,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+  }
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/210"
+                                                                            target="_blank">210</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 210,
+  "message": "用户session已结束"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_token_isLogin"><span
+                                    class="parent">/update</span>/{id}</a> <span class="methods"><a
+                                    href="#token_isLogin_get"><span class="badge badge_delete">delete删除地址</span></a></span></h4>
+                            </div>
+                            <div id="panel_token_isLogin" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#token_isLogin_get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"><p>查询用户是否登录</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="token_isLogin_get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_get">get</span> <span
+                                                    class="parent">/address</span>/isLogin</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>查询用户是否登录</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#token_isLogin_get_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#token_isLogin_get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="token_isLogin_get_request"><h3>
+                                                    Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="token_isLogin_get_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": true,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+  }
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/210"
+                                                                            target="_blank">210</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 210,
+  "message": "用户session已结束"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 id="account" class="panel-title">/item</h3></div>
+                <div class="panel-body">
+                    <div class="panel-group">
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_account"><span
+                                    class="parent"></span>/item</a> <span class="methods"><a
+                                    href="#account_post"><span class="badge badge_get">get</span></a></span></h4>
+                            </div>
+                            <div id="panel_account" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#account_post'" class="list-group-item">
+                                            <span class="badge badge_post">post</span>
+                                            <div class="method_description"><p>添加用户</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="account_post">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span>
+                                                <span class="parent"></span>/item</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>添加用户</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#account_post_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#account_post_response" data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="account_post_request"><h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                    <h3>Query Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>data</strong>: <em>(string)</em>
+                                                            <p>以json形式传输用户信息，用于创建用户</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>{
+  "account": "test1",
+  "name": "xxxx",
+  "systemName": null,
+  "mobilePhone": null,
+  "workPhone": null,
+  "role": "ADMINISTRATOR"
+}
+</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="account_post_response"><h2>HTTP status code <a
+                                                        href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": {
+              "@id": "1",
+              "id": 48,
+              "create_time": 1432536895553,
+              "modify_time": 1432536895553,
+              "account": "test1",
+              "password": "b891502b4664bfe45abaff0f517749e9",
+              "title": null,
+              "name": "xxxx",
+              "systemName": null,
+              "mobilePhone": null,
+              "workPhone": null,
+              "role": "ADMINISTRATOR",
+              "departments": [
+                {
+                  "@id": "2",
+                  "id": 9,
+                  "create_time": 1419827968000,
+                  "modify_time": 1419827968000,
+                  "name": "物价局",
+                  "description": "WJJ_物价局"
+                }
+              ]
+  },
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/400"
+                                                                            target="_blank">400</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 500,
+  "message": "对不起，你没有该权限，请与系统管理员联系"
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/507"
+                                                                            target="_blank">507</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 507,
+  "message": "添加记录失败，请联系管理员"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_account_all"><span
+                                    class="parent">/item</span>/add</a> <span class="methods"><a
+                                    href="#account_all_get"><span class="badge badge_post">post添加商品</span></a></span></h4>
+                            </div>
+                            <div id="panel_account_all" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#account_all_get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"><p>获取所有用户信息</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="account_all_get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_get">get</span> <span
+                                                    class="parent">/item</span>/all</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>获取所有用户信息</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#account_all_get_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#account_all_get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="account_all_get_request"><h3>
+                                                    Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="account_all_get_response"><h2>HTTP status code
+                                                    <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+    "errorCode": "NO_ERROR",
+    "data": [
+        {
+          "@id": "1",
+          "id": 7,
+          "create_time": 1431158276000,
+          "modify_time": 1432384869000,
+          "account": "cgj",
+          "password": "b891502b4664bfe45abaff0f517749e9",
+          "title": "局长",
+          "name": "城管局",
+          "systemName": null,
+          "mobilePhone": "",
+          "workPhone": null,
+          "role": "OPERATOR",
+          "departments": [
+            { … },
+            { … }
+          ]
+        },
+        { … },
+        { … },
+        { … },
+        { … },
+        { … },
+        { … },
+        { … },
+        { … }
+    ],
+    "numPerPage": 0,
+    "curPageNum": 0,
+    "totalItemNum": 0,
+    "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/210"
+                                                                            target="_blank">210</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 210,
+  "message": "用户session已结束"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_account_all"><span
+                                    class="parent">/item</span>/update/{id}</a> <span class="methods"><a
+                                    href="#account_all_get"><span class="badge badge_post">post更新商品</span></a></span></h4>
+                            </div>
+                            <div id="panel_account_all" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#account_all_get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"><p>获取所有用户信息</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="account_all_get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_get">get</span> <span
+                                                    class="parent">/item</span>/all</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>获取所有用户信息</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#account_all_get_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#account_all_get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="account_all_get_request"><h3>
+                                                    Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="account_all_get_response"><h2>HTTP status code
+                                                    <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+    "errorCode": "NO_ERROR",
+    "data": [
+        {
+          "@id": "1",
+          "id": 7,
+          "create_time": 1431158276000,
+          "modify_time": 1432384869000,
+          "account": "cgj",
+          "password": "b891502b4664bfe45abaff0f517749e9",
+          "title": "局长",
+          "name": "城管局",
+          "systemName": null,
+          "mobilePhone": "",
+          "workPhone": null,
+          "role": "OPERATOR",
+          "departments": [
+            { … },
+            { … }
+          ]
+        },
+        { … },
+        { … },
+        { … },
+        { … },
+        { … },
+        { … },
+        { … },
+        { … }
+    ],
+    "numPerPage": 0,
+    "curPageNum": 0,
+    "totalItemNum": 0,
+    "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/210"
+                                                                            target="_blank">210</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 210,
+  "message": "用户session已结束"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_account__id_"><span
+                                    class="parent">/item</span>/{id}</a> <span class="methods"> <a
+                                    href="#account__id__delete"><span
+                                    class="badge badge_delete">delete</span></a></span></h4></div>
+                            <div id="panel_account__id_" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#account__id__get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"><p>获取基本信息</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div onclick="window.location.href = '#account__id__put'"
+                                             class="list-group-item"><span class="badge badge_put">put</span>
+                                            <div class="method_description"><p>更新用户信息</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div onclick="window.location.href = '#account__id__delete'"
+                                             class="list-group-item"><span class="badge badge_delete">delete</span>
+                                            <div class="method_description"><p>删除该用户</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="account__id__get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_get">get</span> <span
+                                                    class="parent">/item</span>/{id}</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>获取基本信息</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#account__id__get_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#account__id__get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="account__id__get_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>id</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="account__id__get_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": {
+      "@id": "1",
+      "id": 41,
+      "create_time": 1432384791000,
+      "modify_time": 1432384791000,
+      "account": "Test9852",
+      "password": "b891502b4664bfe45abaff0f517749e9",
+      "title": null,
+      "name": "Test4387",
+      "systemName": null,
+      "mobilePhone": null,
+      "workPhone": null,
+      "role": "ADMINISTRATOR",
+      "departments": [ ]
+  },
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 404,
+  "message": "找不到对象"
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 500,
+  "message": "对不起，你没有该权限，请与系统管理员联系"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="account__id__put">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_put">put</span> <span
+                                                    class="parent">/item</span>/{id}</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>更新用户信息</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#account__id__put_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#account__id__put_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="account__id__put_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>id</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                    <h3>Query Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>data</strong>: <em>(string)</em>
+                                                            <p>以json形式传输用户信息，用于更新用户信息</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>{
+  "account": "system"
+  "title": null,
+  "name": "xxxx",
+}
+</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="account__id__put_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+  }
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 404,
+  "message": "找不到对象"
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 500,
+  "message": "对不起，你没有该权限，请与系统管理员联系"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="account__id__delete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span>
+                                                <span class="parent">/item</span>/{id}</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>删除该用户</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#account__id__delete_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#account__id__delete_response"
+                                                       data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="account__id__delete_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>id</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="account__id__delete_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 404,
+  "message": "找不到对象"
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 500,
+  "message": "对不起，你没有该权限，请与系统管理员联系"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 id="department" class="panel-title">/order</h3></div>
+                <div class="panel-body">
+                    <div class="panel-group">
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_department"><span
+                                    class="parent"></span>/order</a> <span class="methods"><a
+                                    href="#department_post"><span class="badge badge_post">post获取所有order</span></a></span></h4>
+                            </div>
+                            <div id="panel_department" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#department_post'"
+                                             class="list-group-item"><span class="badge badge_post">post</span>
+                                            <div class="method_description"><p>添加一个 department</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="department_post">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span>
+                                                <span class="parent"></span>/order</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>添加一个 department</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#department_post_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#department_post_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="department_post_request"><h3>
+                                                    Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                    <h3>Query Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>data</strong>: <em>(string)</em>
+                                                            <p>以json形式传输部门信息，用于创建部门</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>{
+  "name": "国税局",
+  "description": "国税局"
+}
+</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="department_post_response"><h2>HTTP status code
+                                                    <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": {
+  "@id": "1",
+  "id": 37,
+  "create_time": 1432538989482,
+  "modify_time": 1432538989482,
+  "name": "国税局",
+  "description": "国税局"
+  },
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "FORBIDDEN",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/507"
+                                                                            target="_blank">507</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 507,
+  "message": "添加记录失败，请联系管理员"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_department_list_all"><span
+                                    class="parent">/order/add</span></a> <span class="methods"><a
+                                    href="#department_list_all_get"><span class="badge badge_post">post</span></a></span>
+                            </h4></div>
+                            <div id="panel_department_list_all" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#department_list_all_get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"><p>获取所有的 department 信息列表</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="department_list_all_get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_post">post</span> <span class="parent">/order/add</span>
+                                            </h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>获取所有的 department 信息列表</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#department_list_all_get_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#department_list_all_get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="department_list_all_get_request"><h3>
+                                                    Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="department_list_all_get_response"><h2>HTTP
+                                                    status code <a href="http://httpstatus.es/200"
+                                                                   target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+
+    "errorCode": "NO_ERROR",
+    "data": [
+                {
+                "@id": "1",
+                "id": 1,
+                "create_time": 1429509369000,
+                "modify_time": 1429535121000,
+                "name": "市长",
+                "description": "SC_市长"
+                },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                { … },
+                {
+                "@id": "24",
+                "id": 37,
+                "create_time": 1432538989000,
+                "modify_time": 1432538989000,
+                "name": "国税局",
+                "description": "国税局"
+                }
+    ],
+    "numPerPage": 0,
+    "curPageNum": 0,
+    "totalItemNum": 0,
+    "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "FORBIDDEN",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_department__id_"><span
+                                    class="parent">/order</span>/{id}</a> <span class="methods"><a
+                                    href="#department__id__delete"><span
+                                    class="badge badge_delete">delete</span></a></span></h4></div>
+                            <div id="panel_department__id_" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#department__id__get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"><p>获取指定的 department 信息列表</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div onclick="window.location.href = '#department__id__put'"
+                                             class="list-group-item"><span class="badge badge_put">put</span>
+                                            <div class="method_description"><p>更新department信息</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div onclick="window.location.href = '#department__id__delete'"
+                                             class="list-group-item"><span class="badge badge_delete">delete</span>
+                                            <div class="method_description"><p>删除department信息</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="department__id__get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_get">get</span> <span
+                                                    class="parent">/order</span>/{id}</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>获取指定的 department 信息列表</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#department__id__get_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#department__id__get_response"
+                                                       data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="department__id__get_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>id</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="department__id__get_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": {
+    "@id": "1",
+    "id": 1,
+    "create_time": 1433143913000,
+    "modify_time": 1433143917000,
+    "name": "市长",
+    "description": "SZ_市长"
+  },
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 404,
+  "message": "找不到对象"
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "FORBIDDEN",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="department__id__put">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_put">put</span> <span
+                                                    class="parent">/order</span>/{id}</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>更新department信息</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#department__id__put_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#department__id__put_response"
+                                                       data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="department__id__put_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>id</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                    <h3>Query Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>data</strong>: <em>(string)</em>
+                                                            <p>以json形式传输department信息，用于更新记录</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>{
+  "create_time": 1433143913000,
+  "modify_time": 1433143917000,
+  "name": "测发电公司分管试",
+  "description": "测2313123试"
+}
+</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="department__id__put_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NOT_FOUND",
+  "data": "Department",
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode":"FORBIDDEN",
+  "data":null,
+  "numPerPage":0,
+  "curPageNum":0,
+  "totalItemNum":0,
+  "totalPageNum":0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="department__id__delete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span>
+                                                <span class="parent">/order</span>/{id}</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>删除department信息</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#department__id__delete_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#department__id__delete_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="department__id__delete_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>id</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="department__id__delete_response"><h2>HTTP
+                                                    status code <a href="http://httpstatus.es/200"
+                                                                   target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Example</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NOT_FOUND",
+  "data": "Department",
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "FORBIDDEN",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 id="kpi" class="panel-title">/user</h3></div>
+                <div class="panel-body">
+                    <div class="panel-group">
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_kpi"><span
+                                    class="parent"></span>/user</a> <span class="methods"><a href="#kpi_post"><span
+                                    class="badge badge_get">get</span></a></span></h4></div>
+                            <div id="panel_kpi" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#kpi_post'" class="list-group-item"><span
+                                                class="badge badge_post">post</span>
+                                            <div class="method_description"><p>添加kpi配置</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="kpi_post">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span>
+                                                <span class="parent"></span>/user</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>添加kpi配置</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#kpi_post_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#kpi_post_response" data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="kpi_post_request"><h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                    <h3>Query Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>data</strong>: <em>(string)</em>
+                                                            <p>以json形式传输kpi信息，用于新增或更新</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>{
+  "unit": 0,
+  "name": "同济大学软件学院",
+  "type": "MONTHLY",
+  "uniqueKey": "test/71",
+  "sortOrder": 4,
+  "description": "百年孤独",
+  "tag": null,
+  "tableName":"IllegalConstructionData",
+  "formulaName":"IllegalConstructionFormula",
+  "isActive":1,
+  "targetType":2,
+  "department": {
+    "id": 7
+  }
+}
+</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="kpi_post_response"><h2>HTTP status code <a
+                                                        href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": {
+    "@id": "1",
+    "id": 7512,
+    "create_time": 1433299569936,
+    "modify_time": 1433299569936,
+    "unit": "percentage",
+    "name": "同济大学软件学院",
+    "type": "MONTHLY",
+    "uniqueKey": "test/71",
+    "sortOrder": 4,
+    "description": "百年孤独",
+    "targetType": "reference",
+    "tag": null,
+    "tableName": "IllegalConstructionData",
+    "formulaName": "IllegalConstructionFormula",
+    "formulaUniqueKey": null,
+    "department": {
+      "@id": "2",
+      "id": 7,
+      "create_time": null,
+      "modify_time": null,
+      "name": null,
+      "description": null
+    }
+  },
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
+                                                                                  data-toggl="collapse"
+                                                                                  href="#panel_kpi__kpiId_"><span
+                                    class="parent">/user</span>/add</a> <span class="methods"><a
+                                    href="#kpi__kpiId__get"><span class="badge badge_post">post</span></a> </span>
+                            </h4></div>
+                            <div id="panel_kpi__kpiId_" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="resource-description"><p>获取kpiId所对应KPI的属性</p></div>
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#kpi__kpiId__get'"
+                                             class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div onclick="window.location.href = '#kpi__kpiId__put'"
+                                             class="list-group-item"><span class="badge badge_put">put</span>
+                                            <div class="method_description"><p>更新kpi属性信息</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div onclick="window.location.href = '#kpi__kpiId__delete'"
+                                             class="list-group-item"><span class="badge badge_delete">delete</span>
+                                            <div class="method_description"><p>删除对应kpi(假删除)</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="kpi__kpiId__get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_post">post</span> <span class="parent">/user</span>/id(用户的)
+                                            </h4></div>
+                                        <div class="modal-body">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#kpi__kpiId__get_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#kpi__kpiId__get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="kpi__kpiId__get_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>kpiId</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="kpi__kpiId__get_response"><h2>HTTP status code
+                                                    <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": {
+    "@id": "1",
+    "id": 7001,
+    "create_time": 1418139200000,
+    "modify_time": 1418139202000,
+    "unit": "car_time",
+    "name": "当日垃圾清运车次",
+    "type": "DAILY",
+    "uniqueKey": "citymanager_rubbish",
+    "sortOrder": 1,
+    "description": "垃圾清运车数",
+    "targetType": "warn",
+    "tag": "垃圾清运",
+    "tableName": "CityManagerLajiData",
+    "formulaName": "CityManagerLajiFormula",
+    "formulaUniqueKey": null,
+    "department": {
+      "@id": "2",
+      "id": 28,
+      "create_time": 1419828188000,
+      "modify_time": 1419828188000,
+      "name": "城管局",
+      "description": "CGJ_城管局"
+    }
+  },
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 404,
+  "message": "找不到对象"
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 500,
+  "message": "对不起，你没有该权限，请与系统管理员联系"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="kpi__kpiId__put">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span
+                                                    class="badge badge_put">put</span> <span class="parent">/user</span>/id(用户的)
+                                            </h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>更新kpi属性信息</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#kpi__kpiId__put_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#kpi__kpiId__put_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="kpi__kpiId__put_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>kpiId</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                    <h3>Query Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>data</strong>: <em>(string)</em>
+                                                            <p>以json形式kpi属性信息，用于更新kpi</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>{
+  "unit": "percentage",
+  "name": "新加一个测试",
+  "type": "MONTHLY",
+  "uniqueKey": "test/71",
+  "sortOrder": 4,
+  "description": "新加一个测试的KPI",
+  "targetType": "reference",
+  "tag": null,
+  "tableName": "IllegalConstructionData",
+  "formulaName": "IllegalConstructionFormula",
+  "formulaUniqueKey": null
+}
+</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="kpi__kpiId__put_response"><h2>HTTP status code
+                                                    <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NOT_FOUND",
+  "data": "KPI",
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "FORBIDDEN",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="kpi__kpiId__delete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span>
+                                                <span class="parent">/user</span>/{id}</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>删除对应kpi(假删除)</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#kpi__kpiId__delete_request"
+                                                                      data-toggl="tab">Request</a></li>
+                                                <li><a href="#kpi__kpiId__delete_response"
+                                                       data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="kpi__kpiId__delete_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>kpiId</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="kpi__kpiId__delete_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": true,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404"
+                                                                            target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NOT_FOUND",
+  "data": "class com.tj.kpi.entity.KPI",
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500"
+                                                                            target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "FORBIDDEN",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggl="collapse" href="#panel_kpi__kpiId_"><span class="parent">/user</span>/{id}</a>
+                                <span class="methods"> <a href="#kpi__kpiId__delete"><span class="badge badge_delete">delete</span></a></span>
+                            </h4></div>
+                            <div id="panel_kpi__kpiId_" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="resource-description"><p>获取kpiId所对应KPI的属性</p></div>
+                                    <div class="list-group">
+                                        <div onclick="window.location.href = '#kpi__kpiId__get'" class="list-group-item"><span class="badge badge_get">get</span>
+                                            <div class="method_description"></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div onclick="window.location.href = '#kpi__kpiId__put'" class="list-group-item"><span class="badge badge_put">put</span>
+                                            <div class="method_description"><p>更新kpi属性信息</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div onclick="window.location.href = '#kpi__kpiId__delete'" class="list-group-item"><span class="badge badge_delete">delete</span>
+                                            <div class="method_description"><p>删除对应kpi(假删除)</p></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="kpi__kpiId__get">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/user</span>/{kpiId}
+                                            </h4></div>
+                                        <div class="modal-body">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#kpi__kpiId__get_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#kpi__kpiId__get_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="kpi__kpiId__get_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>kpiId</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="kpi__kpiId__get_response"><h2>HTTP status code
+                                                    <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": {
+    "@id": "1",
+    "id": 7001,
+    "create_time": 1418139200000,
+    "modify_time": 1418139202000,
+    "unit": "car_time",
+    "name": "当日垃圾清运车次",
+    "type": "DAILY",
+    "uniqueKey": "citymanager_rubbish",
+    "sortOrder": 1,
+    "description": "垃圾清运车数",
+    "targetType": "warn",
+    "tag": "垃圾清运",
+    "tableName": "CityManagerLajiData",
+    "formulaName": "CityManagerLajiFormula",
+    "formulaUniqueKey": null,
+    "department": {
+      "@id": "2",
+      "id": 28,
+      "create_time": 1419828188000,
+      "modify_time": 1419828188000,
+      "name": "城管局",
+      "description": "CGJ_城管局"
+    }
+  },
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 404,
+  "message": "找不到对象"
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "code": 500,
+  "message": "对不起，你没有该权限，请与系统管理员联系"
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="kpi__kpiId__put">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/user</span>/{kpiId}
+                                            </h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>更新kpi属性信息</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#kpi__kpiId__put_request" data-toggl="tab">Request</a>
+                                                </li>
+                                                <li><a href="#kpi__kpiId__put_response" data-toggl="tab">Response</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="kpi__kpiId__put_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>kpiId</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                    <h3>Query Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>data</strong>: <em>(string)</em>
+                                                            <p>以json形式kpi属性信息，用于更新kpi</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>{
+  "unit": "percentage",
+  "name": "新加一个测试",
+  "type": "MONTHLY",
+  "uniqueKey": "test/71",
+  "sortOrder": 4,
+  "description": "新加一个测试的KPI",
+  "targetType": "reference",
+  "tag": null,
+  "tableName": "IllegalConstructionData",
+  "formulaName": "IllegalConstructionFormula",
+  "formulaUniqueKey": null
+}
+</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="kpi__kpiId__put_response"><h2>HTTP status code
+                                                    <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NOT_FOUND",
+  "data": "KPI",
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "FORBIDDEN",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" tabindex="0" id="kpi__kpiId__delete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span>
+                                                <span class="parent">/user</span>/{kpiId}</h4></div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-info"><p>删除对应kpi(假删除)</p></div>
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#kpi__kpiId__delete_request" data-toggl="tab">Request</a></li>
+                                                <li><a href="#kpi__kpiId__delete_response" data-toggl="tab">Response</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="kpi__kpiId__delete_request"><h3>URI
+                                                    Parameters</h3>
+                                                    <ul>
+                                                        <li><strong>kpiId</strong>: <em>required (string)</em></li>
+                                                    </ul>
+                                                    <h3>Headers</h3>
+                                                    <ul>
+                                                        <li><strong>X-Auth-Token</strong>: <em>required (string)</em>
+                                                            <p>当前用户token，用于验证权限,从登录返回的header中获取</p>
+                                                            <p><strong>Example</strong>:</p>
+                                                            <pre>eyJhY2NvdW50Ijp7IkBpZCI6IjEiLCJpZCI6Mj</pre>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tab-pane" id="kpi__kpiId__delete_response"><h2>HTTP status
+                                                    code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NO_ERROR",
+  "data": true,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "NOT_FOUND",
+  "data": "class com.tj.kpi.entity.KPI",
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                    <h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2>
+                                                    <h3>Body</h3>
+                                                    <p><strong>Type: application/json</strong></p>
+                                                    <p><strong>Schema</strong>:</p>
+                                                    <pre><code>{
+  "errorCode": "FORBIDDEN",
+  "data": null,
+  "numPerPage": 0,
+  "curPageNum": 0,
+  "totalItemNum": 0,
+  "totalPageNum": 0
+}
+</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div id="sidebar" class="hidden-print affix" role="complementary">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#token">/address</a></li>
+                    <li><a href="#account">/item</a></li>
+                    <li><a href="#department">/order</a></li>
+                    <li><a href="#kpi">/user</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
