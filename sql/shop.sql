@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.24)
 # Database: shop
-# Generation Time: 2017-04-30 04:41:28 +0000
+# Generation Time: 2017-04-30 04:58:45 +0000
 # ************************************************************
 
 
@@ -49,7 +49,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `t_merchant`;
 
 CREATE TABLE `t_merchant` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
@@ -72,16 +72,19 @@ CREATE TABLE `t_orderitem` (
   `product` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `mer_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_n7j2urgoicw0qa2b5s2pidind` (`order_id`),
   KEY `FK_cxxgytqnjjrpm4x7k2grbm6iu` (`product`),
   KEY `FK2yx4lqm9mh15mysa9kppvf77r` (`product_id`),
   KEY `user` (`user_id`),
+  KEY `mer` (`mer_id`),
   CONSTRAINT `FK2yx4lqm9mh15mysa9kppvf77r` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`id`),
   CONSTRAINT `FK_cxxgytqnjjrpm4x7k2grbm6iu` FOREIGN KEY (`product`) REFERENCES `t_product` (`id`),
   CONSTRAINT `FK_n7j2urgoicw0qa2b5s2pidind` FOREIGN KEY (`order_id`) REFERENCES `t_order` (`id`),
   CONSTRAINT `FKj435mnwwxw5wci0t6xi15ddxk` FOREIGN KEY (`order_id`) REFERENCES `t_order` (`id`),
+  CONSTRAINT `mer` FOREIGN KEY (`mer_id`) REFERENCES `t_merchant` (`id`),
   CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -99,17 +102,20 @@ CREATE TABLE `t_product` (
   `pic_url` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `price` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `mer_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `merchant` (`mer_id`),
+  CONSTRAINT `merchant` FOREIGN KEY (`mer_id`) REFERENCES `t_merchant` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `t_product` WRITE;
 /*!40000 ALTER TABLE `t_product` DISABLE KEYS */;
 
-INSERT INTO `t_product` (`id`, `create_time`, `note`, `pic_url`, `title`, `price`)
+INSERT INTO `t_product` (`id`, `create_time`, `note`, `pic_url`, `title`, `price`, `mer_id`)
 VALUES
-	(1,'2013-07-10 15:01:26','阿斯顿发楼思考点附近啦静安寺离开对方进来看撒经费等楼库萨克警方流口水京东方连空间撒离开的解放路口近代史路口附近','/images/l_pro01.gif','水果',NULL),
-	(2,'2013-07-30 15:03:29','士大夫','/images/l_pro02.gif','高级餐具',NULL),
-	(3,'2013-08-14 15:03:57','进梵蒂冈','/images/l_pro03.gif','红木茶具套装',NULL);
+	(1,'2013-07-10 15:01:26','阿斯顿发楼思考点附近啦静安寺离开对方进来看撒经费等楼库萨克警方流口水京东方连空间撒离开的解放路口近代史路口附近','/images/l_pro01.gif','水果',NULL,NULL),
+	(2,'2013-07-30 15:03:29','士大夫','/images/l_pro02.gif','高级餐具',NULL,NULL),
+	(3,'2013-08-14 15:03:57','进梵蒂冈','/images/l_pro03.gif','红木茶具套装',NULL,NULL);
 
 /*!40000 ALTER TABLE `t_product` ENABLE KEYS */;
 UNLOCK TABLES;
