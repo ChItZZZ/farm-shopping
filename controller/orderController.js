@@ -41,7 +41,7 @@ exports.findAllOrder = function (req, res, next) {
     var userId = data.id || 0;
     var values_order = [userId, 0, 5];
     var sql_order = userId != 0 ?
-        'SELECT * FROM t_orderitem where id = ?  LIMIT ?,? ':
+        'SELECT * FROM t_orderitem where user_id = ?  LIMIT ?,? ':
         'SELECT * FROM t_orderitem LIMIT ?,? ';
 
     db.exec(sql_order, values_order, function (err, result) {
