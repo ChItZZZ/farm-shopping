@@ -17,7 +17,7 @@ exports.findAllUsers = function(req, res, next) {
 exports.registerUser = function (req, res, next) {
     var data = req.body;
     var post = (JSON.parse(JSON.stringify(data)));
-    console.log(post);
+
     var sql = 'INSERT INTO t_user SET ?';
     db.exec(sql,post,function (err, result) {
         var rs={}

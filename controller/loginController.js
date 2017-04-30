@@ -12,7 +12,9 @@ exports.userLogin = function (req, res, next) {
     db.exec(sql,[username],function (err, result) {
         var rs = {};
         var pwd = result && result[0] && result[0].password;
+        var uid = result && result[0] && result[0].id;
         var checked = pwd == password
+        console.log(pwd);
         if(err || !checked){
             rs.errorCode = 1;
             rs.msg = 'login fail'
@@ -20,6 +22,9 @@ exports.userLogin = function (req, res, next) {
         }
         rs.errorCode = 0;
         rs.msg = 'success'
+        rs.username = username
+        rs.uid = uid;
+        console.log(rs);
         res.json(rs)
         res.end()
     })

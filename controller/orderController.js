@@ -39,10 +39,10 @@ exports.addOrder = function (req, res, next) {
 exports.findAllOrder = function (req, res, next) {
     var data = req.body;
     var userId = data.id || 0;
-    var values_order = [userId, 0, 5];
+    var values_order = [userId];
     var sql_order = userId != 0 ?
-        'SELECT * FROM t_orderitem where user_id = ?  LIMIT ?,? ':
-        'SELECT * FROM t_orderitem LIMIT ?,? ';
+        'SELECT * FROM t_orderitem where user_id = ?  ':
+        'SELECT * FROM t_orderitem ';
 
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {
