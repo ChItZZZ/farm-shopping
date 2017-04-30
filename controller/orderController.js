@@ -38,9 +38,12 @@ exports.addOrder = function (req, res, next) {
 
 exports.findAllOrder = function (req, res, next) {
     var data = req.body;
-    var userId = data.Id || '1';
+    var userId = data.id || 0;
     var values_order = [userId, 0, 5];
-    var sql_order = 'SELECT * FROM t_orderitem where id = ?  LIMIT ?,? ';
+    var sql_order = userId != 0 ?
+        'SELECT * FROM t_orderitem where id = ?  LIMIT ?,? ':
+        'SELECT * FROM t_orderitem LIMIT ?,? ';
+
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {
             console.log('get historyOrder from db err');
