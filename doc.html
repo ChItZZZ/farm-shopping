@@ -16,7 +16,7 @@
                 hljs.highlightBlock(block);
             });
 
-            $('[data-toggl]').click(function () {
+            $('[data-toggle]').click(function () {
                 var selector = $(this).data('target') + ' pre code';
                 $(selector).each(function (i, block) {
                     hljs.highlightBlock(block);
@@ -193,7 +193,7 @@
                     <div class="panel-group">
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_token"><span
                                     class="parent"></span>/address</a> <span class="methods"> <a href="#token_delete"><span
                                     class="badge badge_post">post所有address</span></a></span></h4></div>
@@ -209,9 +209,9 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>用户登录获取token，通过headers返回</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#token_post_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#token_post_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#token_post_response" data-toggl="tab">Response</a></li>
+                                                <li><a href="#token_post_response" data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="token_post_request"><h3>Headers</h3>
@@ -314,9 +314,9 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>登出用户</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#token_delete_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#token_delete_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#token_delete_response" data-toggl="tab">Response</a></li>
+                                                <li><a href="#token_delete_response" data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="token_delete_request"><h3>Headers</h3>
@@ -351,7 +351,7 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_token_isLogin"><span
                                     class="parent">/address</span>/add</a> <span class="methods"><a
                                     href="#token_isLogin_get"><span class="badge badge_post">post添加地址</span></a></span></h4>
@@ -361,7 +361,7 @@
                                     <div class="list-group">
                                         <div onclick="window.location.href = '#token_isLogin_get'"
                                              class="list-group-item"><span class="badge badge_get">get</span>
-                                            <div class="method_description"><p>查询用户是否登录</p></div>
+                                            <div class="method_description"><p></p></div>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
@@ -381,8 +381,8 @@
                                             <div class="alert alert-info"><p>查询用户是否登录</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#token_isLogin_get_request"
-                                                                      data-toggl="tab">Request</a></li>
-                                                <li><a href="#token_isLogin_get_response" data-toggl="tab">Response</a>
+                                                                      data-toggle="tab">Request</a></li>
+                                                <li><a href="#token_isLogin_get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -430,9 +430,9 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_token_isLogin"><span
-                                    class="parent">/update</span>/{id}</a> <span class="methods"><a
+                                    class="parent">/address/update</span>/{id}</a> <span class="methods"><a
                                     href="#token_isLogin_get"><span class="badge badge_post">post更新地址</span></a></span></h4>
                             </div>
                             <div id="panel_token_isLogin" class="panel-collapse collapse">
@@ -460,8 +460,8 @@
                                             <div class="alert alert-info"><p>查询用户是否登录</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#token_isLogin_get_request"
-                                                                      data-toggl="tab">Request</a></li>
-                                                <li><a href="#token_isLogin_get_response" data-toggl="tab">Response</a>
+                                                                      data-toggle="tab">Request</a></li>
+                                                <li><a href="#token_isLogin_get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -509,9 +509,9 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_token_isLogin"><span
-                                    class="parent">/update</span>/{id}</a> <span class="methods"><a
+                                    class="parent">/address</span>/{id}</a> <span class="methods"><a
                                     href="#token_isLogin_get"><span class="badge badge_delete">delete删除地址</span></a></span></h4>
                             </div>
                             <div id="panel_token_isLogin" class="panel-collapse collapse">
@@ -539,8 +539,8 @@
                                             <div class="alert alert-info"><p>查询用户是否登录</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#token_isLogin_get_request"
-                                                                      data-toggl="tab">Request</a></li>
-                                                <li><a href="#token_isLogin_get_response" data-toggl="tab">Response</a>
+                                                                      data-toggle="tab">Request</a></li>
+                                                <li><a href="#token_isLogin_get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -595,7 +595,7 @@
                     <div class="panel-group">
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_account"><span
                                     class="parent"></span>/item</a> <span class="methods"><a
                                     href="#account_post"><span class="badge badge_get">get</span></a></span></h4>
@@ -623,9 +623,9 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>添加用户</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#account_post_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#account_post_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#account_post_response" data-toggl="tab">Response</a></li>
+                                                <li><a href="#account_post_response" data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="account_post_request"><h3>Headers</h3>
@@ -723,7 +723,7 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_account_all"><span
                                     class="parent">/item</span>/add</a> <span class="methods"><a
                                     href="#account_all_get"><span class="badge badge_post">post添加商品</span></a></span></h4>
@@ -752,9 +752,9 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>获取所有用户信息</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#account_all_get_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#account_all_get_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#account_all_get_response" data-toggl="tab">Response</a>
+                                                <li><a href="#account_all_get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -828,7 +828,7 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_account_all"><span
                                     class="parent">/item</span>/update/{id}</a> <span class="methods"><a
                                     href="#account_all_get"><span class="badge badge_post">post更新商品</span></a></span></h4>
@@ -857,9 +857,9 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>获取所有用户信息</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#account_all_get_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#account_all_get_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#account_all_get_response" data-toggl="tab">Response</a>
+                                                <li><a href="#account_all_get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -933,7 +933,7 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_account__id_"><span
                                     class="parent">/item</span>/{id}</a> <span class="methods"> <a
                                     href="#account__id__delete"><span
@@ -973,8 +973,8 @@
                                             <div class="alert alert-info"><p>获取基本信息</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#account__id__get_request"
-                                                                      data-toggl="tab">Request</a></li>
-                                                <li><a href="#account__id__get_response" data-toggl="tab">Response</a>
+                                                                      data-toggle="tab">Request</a></li>
+                                                <li><a href="#account__id__get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -1060,8 +1060,8 @@
                                             <div class="alert alert-info"><p>更新用户信息</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#account__id__put_request"
-                                                                      data-toggl="tab">Request</a></li>
-                                                <li><a href="#account__id__put_response" data-toggl="tab">Response</a>
+                                                                      data-toggle="tab">Request</a></li>
+                                                <li><a href="#account__id__put_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -1146,9 +1146,9 @@
                                             <div class="alert alert-info"><p>删除该用户</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#account__id__delete_request"
-                                                                      data-toggl="tab">Request</a></li>
+                                                                      data-toggle="tab">Request</a></li>
                                                 <li><a href="#account__id__delete_response"
-                                                       data-toggl="tab">Response</a></li>
+                                                       data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="account__id__delete_request"><h3>URI
@@ -1215,7 +1215,7 @@
                     <div class="panel-group">
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_department"><span
                                     class="parent"></span>/order</a> <span class="methods"><a
                                     href="#department_post"><span class="badge badge_post">post获取所有order</span></a></span></h4>
@@ -1243,9 +1243,9 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>添加一个 department</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#department_post_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#department_post_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#department_post_response" data-toggl="tab">Response</a>
+                                                <li><a href="#department_post_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -1325,7 +1325,7 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_department_list_all"><span
                                     class="parent">/order/add</span></a> <span class="methods"><a
                                     href="#department_list_all_get"><span class="badge badge_post">post</span></a></span>
@@ -1355,8 +1355,8 @@
                                             <div class="alert alert-info"><p>获取所有的 department 信息列表</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#department_list_all_get_request"
-                                                                      data-toggl="tab">Request</a></li>
-                                                <li><a href="#department_list_all_get_response" data-toggl="tab">Response</a>
+                                                                      data-toggle="tab">Request</a></li>
+                                                <li><a href="#department_list_all_get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -1448,7 +1448,7 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_department__id_"><span
                                     class="parent">/order</span>/{id}</a> <span class="methods"><a
                                     href="#department__id__delete"><span
@@ -1488,9 +1488,9 @@
                                             <div class="alert alert-info"><p>获取指定的 department 信息列表</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#department__id__get_request"
-                                                                      data-toggl="tab">Request</a></li>
+                                                                      data-toggle="tab">Request</a></li>
                                                 <li><a href="#department__id__get_response"
-                                                       data-toggl="tab">Response</a></li>
+                                                       data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="department__id__get_request"><h3>URI
@@ -1572,9 +1572,9 @@
                                             <div class="alert alert-info"><p>更新department信息</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#department__id__put_request"
-                                                                      data-toggl="tab">Request</a></li>
+                                                                      data-toggle="tab">Request</a></li>
                                                 <li><a href="#department__id__put_response"
-                                                       data-toggl="tab">Response</a></li>
+                                                       data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="department__id__put_request"><h3>URI
@@ -1666,8 +1666,8 @@
                                             <div class="alert alert-info"><p>删除department信息</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#department__id__delete_request"
-                                                                      data-toggl="tab">Request</a></li>
-                                                <li><a href="#department__id__delete_response" data-toggl="tab">Response</a>
+                                                                      data-toggle="tab">Request</a></li>
+                                                <li><a href="#department__id__delete_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -1744,7 +1744,7 @@
                     <div class="panel-group">
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_kpi"><span
                                     class="parent"></span>/user</a> <span class="methods"><a href="#kpi_post"><span
                                     class="badge badge_get">get</span></a></span></h4></div>
@@ -1772,8 +1772,8 @@
                                             <div class="alert alert-info"><p>添加kpi配置</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#kpi_post_request"
-                                                                      data-toggl="tab">Request</a></li>
-                                                <li><a href="#kpi_post_response" data-toggl="tab">Response</a></li>
+                                                                      data-toggle="tab">Request</a></li>
+                                                <li><a href="#kpi_post_response" data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="kpi_post_request"><h3>Headers</h3>
@@ -1856,7 +1856,7 @@
                         </div>
                         <div class="panel panel-white">
                             <div class="panel-heading"><h4 class="panel-title"><a class="collapsed"
-                                                                                  data-toggl="collapse"
+                                                                                  data-toggle="collapse"
                                                                                   href="#panel_kpi__kpiId_"><span
                                     class="parent">/user</span>/add</a> <span class="methods"><a
                                     href="#kpi__kpiId__get"><span class="badge badge_post">post</span></a> </span>
@@ -1895,9 +1895,9 @@
                                             </h4></div>
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#kpi__kpiId__get_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#kpi__kpiId__get_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#kpi__kpiId__get_response" data-toggl="tab">Response</a>
+                                                <li><a href="#kpi__kpiId__get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -1992,9 +1992,9 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>更新kpi属性信息</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#kpi__kpiId__put_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#kpi__kpiId__put_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#kpi__kpiId__put_response" data-toggl="tab">Response</a>
+                                                <li><a href="#kpi__kpiId__put_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -2094,9 +2094,9 @@
                                             <div class="alert alert-info"><p>删除对应kpi(假删除)</p></div>
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a href="#kpi__kpiId__delete_request"
-                                                                      data-toggl="tab">Request</a></li>
+                                                                      data-toggle="tab">Request</a></li>
                                                 <li><a href="#kpi__kpiId__delete_response"
-                                                       data-toggl="tab">Response</a></li>
+                                                       data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="kpi__kpiId__delete_request"><h3>URI
@@ -2163,7 +2163,7 @@
                             </div>
                         </div>
                         <div class="panel panel-white">
-                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggl="collapse" href="#panel_kpi__kpiId_"><span class="parent">/user</span>/{id}</a>
+                            <div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_kpi__kpiId_"><span class="parent">/user</span>/{id}</a>
                                 <span class="methods"> <a href="#kpi__kpiId__delete"><span class="badge badge_delete">delete</span></a></span>
                             </h4></div>
                             <div id="panel_kpi__kpiId_" class="panel-collapse collapse">
@@ -2196,9 +2196,9 @@
                                             </h4></div>
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#kpi__kpiId__get_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#kpi__kpiId__get_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#kpi__kpiId__get_response" data-toggl="tab">Response</a>
+                                                <li><a href="#kpi__kpiId__get_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -2290,9 +2290,9 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>更新kpi属性信息</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#kpi__kpiId__put_request" data-toggl="tab">Request</a>
+                                                <li class="active"><a href="#kpi__kpiId__put_request" data-toggle="tab">Request</a>
                                                 </li>
-                                                <li><a href="#kpi__kpiId__put_response" data-toggl="tab">Response</a>
+                                                <li><a href="#kpi__kpiId__put_response" data-toggle="tab">Response</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -2389,8 +2389,8 @@
                                         <div class="modal-body">
                                             <div class="alert alert-info"><p>删除对应kpi(假删除)</p></div>
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#kpi__kpiId__delete_request" data-toggl="tab">Request</a></li>
-                                                <li><a href="#kpi__kpiId__delete_response" data-toggl="tab">Response</a></li>
+                                                <li class="active"><a href="#kpi__kpiId__delete_request" data-toggle="tab">Request</a></li>
+                                                <li><a href="#kpi__kpiId__delete_response" data-toggle="tab">Response</a></li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="kpi__kpiId__delete_request"><h3>URI
