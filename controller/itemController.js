@@ -5,7 +5,7 @@ var db = require('../utils/db')
 
 exports.findAllItems = function (req, res, next) {
     var values_order = [0, 5];
-    var sql_order = 'SELECT * FROM t_product LIMIT ?,? ';
+    var sql_order = 'SELECT * FROM t_product p LEFT JOIN t_merchant m on p.mer_id = m.mid';
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {
             console.log('get historyOrder from db err');
