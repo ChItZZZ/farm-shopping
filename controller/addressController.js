@@ -8,8 +8,8 @@ var db = require('../utils/db')
 exports.findAllAddress = function (req, res, next) {
     var param = req.body;
     var userId = param.id;
-    var values_order = [userId,0, 5];
-    var sql_order = 'SELECT * FROM t_useraddress WHERE user_id = ? LIMIT ?,? ';
+    var values_order = [userId];
+    var sql_order = 'SELECT * FROM t_useraddress WHERE user_id = ? ';
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {
             console.log('get historyOrder from db err');

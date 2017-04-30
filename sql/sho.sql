@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.24)
 # Database: shop
-# Generation Time: 2017-04-30 10:10:38 +0000
+# Generation Time: 2017-04-30 15:29:04 +0000
 # ************************************************************
 
 
@@ -69,6 +69,27 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table t_order
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `t_order`;
+
+CREATE TABLE `t_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `total_price` double DEFAULT NULL,
+  `zipcode` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKho2r4qgj3txpy8964fnla95ub` (`user_id`),
+  CONSTRAINT `FKho2r4qgj3txpy8964fnla95ub` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table t_orderitem
 # ------------------------------------------------------------
 
@@ -78,7 +99,6 @@ CREATE TABLE `t_orderitem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `quantity` int(11) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
-  `product` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `user_id` int(11) NOT NULL,
@@ -86,18 +106,24 @@ CREATE TABLE `t_orderitem` (
   `state` int(5) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_n7j2urgoicw0qa2b5s2pidind` (`order_id`),
-  KEY `FK_cxxgytqnjjrpm4x7k2grbm6iu` (`product`),
   KEY `FK2yx4lqm9mh15mysa9kppvf77r` (`product_id`),
   KEY `user` (`user_id`),
   KEY `mer` (`mer_id`),
   CONSTRAINT `FK2yx4lqm9mh15mysa9kppvf77r` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`id`),
-  CONSTRAINT `FK_cxxgytqnjjrpm4x7k2grbm6iu` FOREIGN KEY (`product`) REFERENCES `t_product` (`id`),
   CONSTRAINT `FK_n7j2urgoicw0qa2b5s2pidind` FOREIGN KEY (`order_id`) REFERENCES `t_order` (`id`),
-  CONSTRAINT `FKj435mnwwxw5wci0t6xi15ddxk` FOREIGN KEY (`order_id`) REFERENCES `t_order` (`id`),
   CONSTRAINT `mer` FOREIGN KEY (`mer_id`) REFERENCES `t_merchant` (`mid`),
   CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `t_orderitem` WRITE;
+/*!40000 ALTER TABLE `t_orderitem` DISABLE KEYS */;
+
+INSERT INTO `t_orderitem` (`id`, `quantity`, `order_id`, `product_id`, `date`, `user_id`, `mer_id`, `state`)
+VALUES
+	(1,1,1,1,NULL,1,0,1);
+
+/*!40000 ALTER TABLE `t_orderitem` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table t_product
@@ -113,6 +139,7 @@ CREATE TABLE `t_product` (
   `title` varchar(255) DEFAULT NULL,
   `price` double DEFAULT NULL,
   `mer_id` int(11) DEFAULT NULL,
+  `type` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `merchant` (`mer_id`),
   CONSTRAINT `merchant` FOREIGN KEY (`mer_id`) REFERENCES `t_merchant` (`mid`)
@@ -121,11 +148,11 @@ CREATE TABLE `t_product` (
 LOCK TABLES `t_product` WRITE;
 /*!40000 ALTER TABLE `t_product` DISABLE KEYS */;
 
-INSERT INTO `t_product` (`id`, `create_time`, `note`, `pic_url`, `title`, `price`, `mer_id`)
+INSERT INTO `t_product` (`id`, `create_time`, `note`, `pic_url`, `title`, `price`, `mer_id`, `type`)
 VALUES
-	(1,'2013-07-10 15:01:26','阿斯顿发楼思考点附近啦静安寺离开对方进来看撒经费等楼库萨克警方流口水京东方连空间撒离开的解放路口近代史路口附近','/images/l_pro01.gif','水果',NULL,1),
-	(2,'2013-07-30 15:03:29','士大夫','/images/l_pro02.gif','高级餐具',NULL,NULL),
-	(3,'2013-08-14 15:03:57','进梵蒂冈','/images/l_pro03.gif','红木茶具套装',NULL,NULL);
+	(1,'2013-07-10 15:01:26','阿斯顿发楼思考点附近啦静安寺离开对方进来看撒经费等楼库萨克警方流口水京东方连空间撒离开的解放路口近代史路口附近','/images/l_pro01.gif','水果',NULL,1,NULL),
+	(2,'2013-07-30 15:03:29','士大夫','/images/l_pro02.gif','高级餐具',NULL,NULL,NULL),
+	(3,'2013-08-14 15:03:57','进梵蒂冈','/images/l_pro03.gif','红木茶具套装',NULL,NULL,NULL);
 
 /*!40000 ALTER TABLE `t_product` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -168,7 +195,6 @@ CREATE TABLE `t_user` (
   `address` varchar(50) DEFAULT NULL,
   `password` varchar(14) NOT NULL,
   `phone` varchar(11) DEFAULT NULL,
-  `remark` varchar(50) DEFAULT NULL,
   `username` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -176,10 +202,10 @@ CREATE TABLE `t_user` (
 LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
 
-INSERT INTO `t_user` (`id`, `address`, `password`, `phone`, `remark`, `username`)
+INSERT INTO `t_user` (`id`, `address`, `password`, `phone`, `username`)
 VALUES
-	(1,'重庆市南岸区万达4栋29-18','1234','13888888888',NULL,'周文滔'),
-	(2,NULL,'123456',NULL,NULL,'nicky');
+	(1,'重庆市南岸区万达4栋29-18','1234','13888888888','周文滔'),
+	(2,NULL,'123456',NULL,'nicky');
 
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
