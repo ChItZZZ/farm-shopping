@@ -38,7 +38,7 @@ exports.findAllOrder = function (req, res, next) {
     var data = req.body;
     var userId = data.user_id || 0;
     var values_order = [userId];
-    var sql = 'select * from t_orderitem o left join t_product p on o.product_id = p.pid left join t_merchant m on m.mid = o.mer_id;'
+    var sql = 'select * from t_orderitem o left join t_product p on o.product_id = p.pid left join t_merchant m on m.mid = o.mer_id'
     var sql_order = userId != 0 ? sql+'where user_id = ? ': sql;
 
     db.exec(sql_order, values_order, function (err, result) {
