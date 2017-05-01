@@ -52,7 +52,7 @@ exports.findAllOrder = function (req, res, next) {
         var rs = [];
         result.length && result.forEach(function (v, i) {
             rs.push(v)
-            var sql_product = 'SELECT * FROM t_product left join t_merchant WHERE t_product.id = ? AND t_product.mer_id == t_merchant.mid';
+            var sql_product = 'SELECT * FROM t_product left join t_merchant WHERE t_product.id = ? AND t_product.mer_id = t_merchant.mid';
             db.exec(sql_product,[v.product_id],function (err, result) {
                 if(err) {
                     return res.json(rs);
