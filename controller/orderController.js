@@ -57,14 +57,14 @@ exports.findAllOrder = function (req, res, next) {
                 if(err) {
                     return res.json(rs);
                 }
-                rs[i].title = result && result[0].title;
-                rs[i].price = result && result[0].price;
+                rs[i].title = result.length && result[0].title;
+                rs[i].price = result.length && result[0].price;
                 var sql_merchant = 'SELECT name FROM t_merchant WHERE mid = ?'
                 db.exec(sql_merchant,[v.mer_id],function (err, result) {
                     if(err){
                         return res.json(rs)
                     }
-                    rs[i].merchantName = result && result[0].name
+                    rs[i].merchantName = result.length && result[0].name
                     res.json(rs);
                     res.end();
                 })
