@@ -52,8 +52,8 @@ exports.findAllOrder = function (req, res, next) {
         var rs = [];
         result.length && result.forEach(function (v, i) {
             rs.push(v)
-            // var sql_product = 'SELECT * FROM t_product left join t_merchant WHERE t_product.id = ? AND t_product.mer_id = t_merchant.mid';
-            var sql_product = 'SELECT * FROM t_product  WHERE t_product.id = ?';
+            var sql_product = 'SELECT * FROM t_product left join t_merchant ON t_product.mer_id = t_merchant.mid WHERE t_product.id = ?';
+            // var sql_product = 'SELECT * FROM t_product  WHERE t_product.id = ?';
             db.exec(sql_product,[v.product_id],function (err, result) {
                 if(err) {
                     return res.json(rs);
@@ -61,6 +61,8 @@ exports.findAllOrder = function (req, res, next) {
                 rs[i].title = result.length && result[0].title;
                 rs[i].price = result.length && result[0].price;
                 rs[i].imgUrl = result.length && result[0].pic_url;
+                rs[i].merchantName = result.length && result[0].name
+                res.json(rs)
                 // var sql_merchant = 'SELECT name FROM t_merchant WHERE mid = ?'
                 // db.exec(sql_merchant,[v.mer_id],function (err, result) {
                 //     if(err){
