@@ -25,7 +25,7 @@ exports.updateAddress = function (req, res, next) {
     var data = req.body;
     var id = req.params.id;
     //id 是address的id
-    var sql = 'UPDATE t_product SET address= ? ,zipcode = ? , phone = ? WHERE id = ?'
+    var sql = 'UPDATE t_product SET address= ? ,zipcode = ? , phone = ? WHERE aid = ?'
     var values = [data.title,data.price,data.phone];
     db.exec(sql, values, function (err, result) {
         var rs = {}
@@ -67,7 +67,7 @@ exports.addAddress = function (req, res, next) {
 exports.deleteAddressById = function (req, res, next) {
     var data = req.params;
     var values_order = data.id;
-    var sql_order = 'DELETE FROM t_product WHERE id = ?'
+    var sql_order = 'DELETE FROM t_product WHERE aid = ?'
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {
             console.log('get historyOrder from db err');

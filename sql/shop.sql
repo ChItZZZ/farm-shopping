@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.24)
 # Database: shop
-# Generation Time: 2017-04-30 15:29:04 +0000
+# Generation Time: 2017-05-01 07:40:28 +0000
 # ************************************************************
 
 
@@ -85,9 +85,18 @@ CREATE TABLE `t_order` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKho2r4qgj3txpy8964fnla95ub` (`user_id`),
-  CONSTRAINT `FKho2r4qgj3txpy8964fnla95ub` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
+  CONSTRAINT `FKho2r4qgj3txpy8964fnla95ub` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `t_order` WRITE;
+/*!40000 ALTER TABLE `t_order` DISABLE KEYS */;
+
+INSERT INTO `t_order` (`id`, `address`, `create_time`, `phone`, `status`, `total_price`, `zipcode`, `user_id`)
+VALUES
+	(1,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
+/*!40000 ALTER TABLE `t_order` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table t_orderitem
@@ -96,7 +105,7 @@ CREATE TABLE `t_order` (
 DROP TABLE IF EXISTS `t_orderitem`;
 
 CREATE TABLE `t_orderitem` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `oid` int(11) NOT NULL AUTO_INCREMENT,
   `quantity` int(11) DEFAULT NULL,
   `order_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
@@ -104,23 +113,23 @@ CREATE TABLE `t_orderitem` (
   `user_id` int(11) NOT NULL,
   `mer_id` int(11) NOT NULL,
   `state` int(5) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`oid`),
   KEY `FK_n7j2urgoicw0qa2b5s2pidind` (`order_id`),
   KEY `FK2yx4lqm9mh15mysa9kppvf77r` (`product_id`),
   KEY `user` (`user_id`),
   KEY `mer` (`mer_id`),
-  CONSTRAINT `FK2yx4lqm9mh15mysa9kppvf77r` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`id`),
+  CONSTRAINT `FK2yx4lqm9mh15mysa9kppvf77r` FOREIGN KEY (`product_id`) REFERENCES `t_product` (`pid`),
   CONSTRAINT `FK_n7j2urgoicw0qa2b5s2pidind` FOREIGN KEY (`order_id`) REFERENCES `t_order` (`id`),
   CONSTRAINT `mer` FOREIGN KEY (`mer_id`) REFERENCES `t_merchant` (`mid`),
-  CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
+  CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `t_orderitem` WRITE;
 /*!40000 ALTER TABLE `t_orderitem` DISABLE KEYS */;
 
-INSERT INTO `t_orderitem` (`id`, `quantity`, `order_id`, `product_id`, `date`, `user_id`, `mer_id`, `state`)
+INSERT INTO `t_orderitem` (`oid`, `quantity`, `order_id`, `product_id`, `date`, `user_id`, `mer_id`, `state`)
 VALUES
-	(1,1,1,1,NULL,1,0,1);
+	(1,1,1,1,NULL,1,1,1);
 
 /*!40000 ALTER TABLE `t_orderitem` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -132,7 +141,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `t_product`;
 
 CREATE TABLE `t_product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime DEFAULT NULL,
   `note` varchar(255) DEFAULT NULL,
   `pic_url` varchar(255) DEFAULT NULL,
@@ -140,7 +149,7 @@ CREATE TABLE `t_product` (
   `price` double DEFAULT NULL,
   `mer_id` int(11) DEFAULT NULL,
   `type` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`pid`),
   KEY `merchant` (`mer_id`),
   CONSTRAINT `merchant` FOREIGN KEY (`mer_id`) REFERENCES `t_merchant` (`mid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -148,7 +157,7 @@ CREATE TABLE `t_product` (
 LOCK TABLES `t_product` WRITE;
 /*!40000 ALTER TABLE `t_product` DISABLE KEYS */;
 
-INSERT INTO `t_product` (`id`, `create_time`, `note`, `pic_url`, `title`, `price`, `mer_id`, `type`)
+INSERT INTO `t_product` (`pid`, `create_time`, `note`, `pic_url`, `title`, `price`, `mer_id`, `type`)
 VALUES
 	(1,'2013-07-10 15:01:26','阿斯顿发楼思考点附近啦静安寺离开对方进来看撒经费等楼库萨克警方流口水京东方连空间撒离开的解放路口近代史路口附近','/images/l_pro01.gif','水果',NULL,1,NULL),
 	(2,'2013-07-30 15:03:29','士大夫','/images/l_pro02.gif','高级餐具',NULL,NULL,NULL),
@@ -191,18 +200,18 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `t_user`;
 
 CREATE TABLE `t_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(50) DEFAULT NULL,
   `password` varchar(14) NOT NULL,
   `phone` varchar(11) DEFAULT NULL,
   `username` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
 
-INSERT INTO `t_user` (`id`, `address`, `password`, `phone`, `username`)
+INSERT INTO `t_user` (`uid`, `address`, `password`, `phone`, `username`)
 VALUES
 	(1,'重庆市南岸区万达4栋29-18','1234','13888888888','周文滔'),
 	(2,NULL,'123456',NULL,'nicky');
@@ -217,22 +226,22 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `t_useraddress`;
 
 CREATE TABLE `t_useraddress` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aid` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) DEFAULT NULL,
   `consignee` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `zipcode` varchar(255) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`aid`),
   KEY `FK_c0hoxg699yrbg42lrq6738j0n` (`user_id`),
-  CONSTRAINT `FK_c0hoxg699yrbg42lrq6738j0n` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`),
-  CONSTRAINT `FKivjwmwb9xngrc6ic856ryrb57` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
+  CONSTRAINT `FK_c0hoxg699yrbg42lrq6738j0n` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`uid`),
+  CONSTRAINT `FKivjwmwb9xngrc6ic856ryrb57` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `t_useraddress` WRITE;
 /*!40000 ALTER TABLE `t_useraddress` DISABLE KEYS */;
 
-INSERT INTO `t_useraddress` (`id`, `address`, `consignee`, `phone`, `zipcode`, `user_id`)
+INSERT INTO `t_useraddress` (`aid`, `address`, `consignee`, `phone`, `zipcode`, `user_id`)
 VALUES
 	(1,'tongji','shzhong','123456','12306',2);
 

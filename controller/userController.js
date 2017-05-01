@@ -36,8 +36,8 @@ exports.registerUser = function (req, res, next) {
 
 exports.deleteUserById = function (req, res, next) {
     var data = req.params;
-    var values_order = data.id;
-    var sql_order = 'DELETE FROM t_user WHERE id = ?'
+    var values_order = data.uid;
+    var sql_order = 'DELETE FROM t_user WHERE uid = ?'
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {
             console.log('get historyOrder from db err');

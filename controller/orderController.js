@@ -5,8 +5,7 @@ var https = require('https');
 
 exports.deleteOrderById = function (req, res, next) {
     var data = req.params;
-    console.log(data);
-    var sql = 'DELETE FROM t_orderitem WHERE id = ?'
+    var sql = 'DELETE FROM t_orderitem WHERE oid = ?'
     db.exec(sql,[data.id],function (err, result) {
         if (err) {
             console.log(err);
@@ -35,17 +34,12 @@ exports.addOrder = function (req, res, next) {
         res.end()
     })
 }
-function order(rs) {
-
-
-}
 exports.findAllOrder = function (req, res, next) {
     var data = req.body;
     var userId = data.user_id || 0;
     var values_order = [userId];
-    var sql_order = userId != 0 ?
-        'SELECT o.*,p.price,p.title,p.pic_url FROM t_orderitem o left join t_product p on o.product_id = p.id where user_id = ?  ':
-        'SELECT o.*,p.price,p.title,p.pic_url FROM t_orderitem o left join t_product p on o.product_id = p.id';
+    var sql = 'select * from t_orderitem o left join t_product p on o.product_id = p.pid left join t_merchant m on m.mid = o.mer_id;'
+    var sql_order = userId != 0 ? sql+'where user_id = ? ': sql;
 
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {

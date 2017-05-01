@@ -20,7 +20,7 @@ exports.findAllItems = function (req, res, next) {
 exports.updateItem = function (req, res, next) {
     var data = req.body;
     var id = req.params.id;
-    var sql = 'UPDATE t_product SET title= ? ,price = ?WHERE id = ?'
+    var sql = 'UPDATE t_product SET title= ? ,price = ? WHERE pid = ?'
     var values = [data.title,data.price,id];
     db.exec(sql, values, function (err, result) {
         var rs = {}
@@ -61,8 +61,8 @@ exports.addItem = function (req, res, next) {
 
 exports.deleteItemById = function (req, res, next) {
     var data = req.params;
-    var values_order = data.id;
-    var sql_order = 'DELETE FROM t_product WHERE id = ?'
+    var values_order = data.pid;
+    var sql_order = 'DELETE FROM t_product WHERE pid = ?'
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {
             console.log('get historyOrder from db err');
