@@ -33,6 +33,30 @@ exports.registerUser = function (req, res, next) {
         res.end()
     })
 }
+exports.updateUserById = function (req, res, next) {
+    var data = req.body;
+    var id = req.params.id;
+    var sql = 'UPDATE t_user SET password = ?, phone = ?, address = ? WHERE uid = ?';
+    var values = [data.password,data.phone,data.address,id]
+    db.exec(sql,values,function (err, result) {
+        var rs = {}
+        if(err){
+            console.log(2);
+            rs.msg = "update fail"
+            rs.errorCode = 1
+            return res.json(rs);
+        }
+        console.log(3);
+        rs.errorCode = 0;
+        rs.msg = 'update success!'
+        res.json(rs)
+        res.end()
+    })
+
+
+
+
+}
 
 exports.deleteUserById = function (req, res, next) {
     var data = req.params;
