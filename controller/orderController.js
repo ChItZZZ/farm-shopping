@@ -44,15 +44,13 @@ exports.findAllOrder = function (req, res, next) {
         'SELECT * FROM t_orderitem where user_id = ?  ':
         'SELECT * FROM t_orderitem ';
 
-    console.log(sql_order);
     db.exec(sql_order, values_order, function (err, result) {
         if (err) {
             console.log('get historyOrder from db err');
-            res.end();
-            return;
+            return res.end();
         }
         var rs = [];
-        result.forEach(function (v, i) {
+        result.length && result.forEach(function (v, i) {
             rs.push(v)
             var sql_product = 'SELECT title,price FROM t_product WHERE id = ?';
             db.exec(sql_product,[v.product_id],function (err, result) {
