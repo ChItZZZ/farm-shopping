@@ -19,12 +19,14 @@ exports.deleteOrderById = function (req, res, next) {
 }
 
 exports.addOrder = function (req, res, next) {
+    console.log('add order');
     var data = req.body;
     var post = (JSON.parse(JSON.stringify(data)));
+    console.log(post);
     var sql = 'INSERT INTO t_orderitem SET ?';
-    var create_time = moment.format('L')
-    console.log(create_time);
-    post['create_time'] = create_time
+    var date = moment().format()
+    var dateString = date
+    post['date'] = dateString
     db.exec(sql,post,function (err, result) {
         var rs={}
         if(err){

@@ -36,8 +36,22 @@ exports.registerUser = function (req, res, next) {
 exports.updateUserById = function (req, res, next) {
     var data = req.body;
     var id = req.params.id;
-    var sql = 'UPDATE t_user SET password = ?, phone = ?, address = ? WHERE uid = ?';
-    var values = [data.password,data.phone,data.address,id]
+    var sqlArr = [];
+    var passwordSql = data.password?"password='"+data.password+"'" :""
+    var phoneSql = data.phone?("phone='"+data.phone +"'"):""
+    var addressSql = data.address?("address='"+data.address+"'"):""
+    if(passwordSql)
+        sqlArr.push(passwordSql)
+    if(phoneSql)
+        sqlArr.push(phoneSql)
+    if(addressSql)
+        sqlArr.push(addressSql)
+    if(!sqlArr.length) return
+    var sqlString = sqlArr.join(',')
+    // var sql = 'UPDATE t_user SET password = ?, phone = ?, address = ? WHERE uid = ?';
+    var sql = 'UPDATE t_user SET ' + sqlString + ' WHERE uid = ?';
+    console.log(sql);
+    var values = [id]
     db.exec(sql,values,function (err, result) {
         var rs = {}
         if(err){
